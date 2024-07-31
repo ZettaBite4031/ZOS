@@ -83,4 +83,6 @@ dkms.conf
 *.ini
 build/
 toolchain/
+src/bootloader/stage2_OLD
 .vscode/
+tools/
