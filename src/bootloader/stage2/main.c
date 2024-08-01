@@ -3,6 +3,12 @@
 #include "disk.h"
 #include "fat.h"
 #include "memory.h"
+#include "memdefs.h"
+
+uint8_t* KernelLoadBuffer = (uint8_t*)LOAD_KERNEL_ADDR;
+uint8_t* Kernel = (uint8_t*)MEMORY_KERNEL_ADDR;
+
+typedef void(*KernelStart)();
 
 void __attribute__((cdecl)) start(uint16_t driveNumber) {
     cls();
@@ -25,30 +31,22 @@ void __attribute__((cdecl)) start(uint16_t driveNumber) {
     }
     printf("FAT: Successfully initialized FAT for Disk%d\n\n", disk.id);
 
-    FAT_File* fd = FAT_Open(&disk, "/");
-    FAT_DirectoryEntry entry;
-    int i = 0; 
-    printf("=-= ZOS ROOT DIRECTORY =-=\n");
-    while (FAT_ReadEntry(&disk, fd, &entry) && i++ < 5) {
-        printf(" ");
-        for (int i = 0; i < 11; i++)
-            putc(entry.Name[i]);
-        printf("\n");
+
+    // find kernel
+    FAT_File* fd = FAT_Open(&disk, "/kernel.bin");
+    uint32_t read;
+    uint8_t* kernelBuffer = Kernel;
+    while ((read = FAT_Read(&disk, fd, MEMORY_FAT_SIZE, KernelLoadBuffer))) {
+        memcpy(kernelBuffer, KernelLoadBuffer, read);
+        kernelBuffer += read;
     }
     FAT_Close(fd);
 
-    // read test file
-    char buffer[256];
-    uint32_t read;
-    printf("\n");
-    fd = FAT_Open(&disk, "mydir/test.txt");
-    while ((read = FAT_Read(&disk, fd, sizeof(buffer), buffer))) {
-        for (uint32_t i = 0; i < read; i++) {
-            putc(buffer[i]);
-        }
-    }
-    FAT_Close(fd);
+    // load kernel
+    KernelStart kernelStart = (KernelStart)Kernel;
+    kernelStart();
 
 end:
+    printf("Failed to load the kernel!\n");
     for(;;);
 }
