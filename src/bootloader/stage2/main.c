@@ -24,7 +24,7 @@ void __attribute__((cdecl)) start(uint16_t driveNumber) {
     }
     printf("Sucessfully read from disk.\n\n");
     
-    print_buffer("Data: ", g_Data, 512);
+    print_buffer("Boot Sector: ", g_Data, 512);
 
 end:
     for(;;);
