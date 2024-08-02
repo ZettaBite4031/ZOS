@@ -15,7 +15,7 @@ i686_GDT_Load:
     push eax
     push .reload_cs
     retf 
-    .reload_cs
+    .reload_cs:
 
     ; reload data segment
     mov ax, [bp + 16] ; data segment
