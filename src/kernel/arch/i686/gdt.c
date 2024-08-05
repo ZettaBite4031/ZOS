@@ -77,8 +77,9 @@ GDT_Entry g_GDT[] = {
 
 GDTDescriptor g_GDTDesc = { sizeof(g_GDT) - 1, g_GDT };
 
-bool __attribute__((cdecl)) i686_GDT_Load(GDTDescriptor* descriptor, uint16_t codeSegment, uint16_t dataSegment);
+void __attribute__((cdecl)) i686_GDT_Load(GDTDescriptor* descriptor, uint16_t codeSegment, uint16_t dataSegment);
 
 bool i686_GDT_Initialize() {
-    return i686_GDT_Load(&g_GDTDesc, i686_GDT_CODE_SEGMENT, i686_GDT_DATA_SEGMENT);
+    i686_GDT_Load(&g_GDTDesc, i686_GDT_CODE_SEGMENT, i686_GDT_DATA_SEGMENT);
+    return true; 
 }

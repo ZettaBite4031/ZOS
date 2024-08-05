@@ -38,5 +38,6 @@ void i686_IDT_DisableGate(int interrupt) {
 }
 
 bool i686_IDT_Initialize() {
-    return i686_IDT_Load(&g_IDTDescriptor);
+    i686_IDT_Load(&g_IDTDescriptor);
+    return true; 
 }

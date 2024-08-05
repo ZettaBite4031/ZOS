@@ -3,7 +3,7 @@ bits 32
 %macro ISR_NOERRORCODE 1
 global i686_ISR%1
 i686_ISR%1:
-    push 1
+    push 0
     push %1
     jmp isr_common
 %endmacro

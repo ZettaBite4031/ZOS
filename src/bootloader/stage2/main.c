@@ -12,7 +12,6 @@ typedef void(*KernelStart)();
 
 void __attribute__((cdecl)) start(uint16_t driveNumber) {
     cls();
-    printf("=-=-=-=-= ZOS STAGE2 LOADING =-=-=-=-=\n\n");
 
     DISK disk;
     if (!DISK_Initialize(&disk, driveNumber)) {
@@ -20,17 +19,10 @@ void __attribute__((cdecl)) start(uint16_t driveNumber) {
         goto end;
     }
     
-    printf("DISK: Initialized disk #%d\n", driveNumber);
-    printf("DISK: Drive ID - %d\nDISK: Drive Heads - %d\nDISK: Drive Cylinders - %d\nDISK: Drive Sectors - %d\n", 
-            disk.id, disk.heads, disk.cylinders, disk.sectors);
-    
-    putc('\n');
     if (!FAT_Initialize(&disk)) {
         printf("FAT: Failed to initialize FAT for Disk%d\n", disk.id);
         goto end;
     }
-    printf("FAT: Successfully initialized FAT for Disk%d\n\n", disk.id);
-
 
     // find kernel
     FAT_File* fd = FAT_Open(&disk, "/kernel.bin");

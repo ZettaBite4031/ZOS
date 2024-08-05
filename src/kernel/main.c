@@ -18,6 +18,11 @@ void __attribute__((section(".entry"))) start() {
     }
     printf("HAL: Initialized.\n");
     
+    printf("Attempting interrupt call...\n");
+    __asm("int $0x02");                         // There is currently a bug where the BIOS restarts on the interrupt call.
+                                                // I assume the IDT or ISRs aren't set up properly, but I am unsure.
+    printf("Interrupts called...\n");
+    
     printf("\nWelcome to the ZettabiteOS Kernel.\n");
 end:
     for(;;);

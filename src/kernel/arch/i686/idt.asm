@@ -9,7 +9,6 @@ i686_IDT_Load:
     mov eax, [bp + 8]
     lidt [eax]
 
-    mov eax, 1
     mov esp, ebp
     pop ebp
     ret
