@@ -70,7 +70,7 @@ def VerifyKernel(target, source, env):
     required_headers = ("Format: elf64-x86-64", "Arch: x86_64")
     missing = [ value for value in required_headers if value not in headers ]
 
-    if missing or "KernelMain" not in symbols:
+    if missing or "KernelEntry" not in symbols:
         print(headers)
         print(symbols)
         raise RuntimeError("Invalid kernel ELF image or missing KernelMain entry.")

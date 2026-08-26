@@ -24,7 +24,7 @@ for source_path in source_files:
 kernel = kernel_environment.Command(target=f"{component_output}/Kernel.elf", source=kernel_objects, action=(
     "$LINK $KERNEL_LINKFLAGS "
     "--script=$KERNEL_LINKER_SCRIPT "
-    "--entry=KernelMain "
+    "--entry=KernelEntry "
     "-o $TARGET "
     "$SOURCES"), KERNEL_LINKER_SCRIPT=linker_script.abspath)
 

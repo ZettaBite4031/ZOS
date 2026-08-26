@@ -7,7 +7,7 @@
 
 namespace {
     /*
-     * Kernel-lifetime ownership is established before KernelMain
+     * Kernel-lifetime ownership is established before KernelEntry
      * executes and requires no dynamic initialization.
      */
     constinit Zos::Kernel::KernelRuntime g_KernelRuntime{};
@@ -19,7 +19,7 @@ namespace Zos::Kernel {
     }
 }
 
-extern "C" [[noreturn]] __attribute__((section(".text.KernelMain"))) void KernelMain(const Zos::Boot::BootEnvironment* environment) noexcept {
+extern "C" [[noreturn]] __attribute__((section(".text.KernelEntry"))) void KernelEntry(const Zos::Boot::BootEnvironment* environment) noexcept {
     using namespace Zos;
 
     Kernel::Diagnostics::Write(
