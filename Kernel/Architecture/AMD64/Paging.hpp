@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Kernel/Memory/VirtualMemory.hpp>
+#include <Kernel/Memory/VirtualAddressAllocator.hpp>
 
 namespace Zos::Kernel::Architecture::AMD64 {
     enum class PageMapInitializationError : Memory::Uint32 {

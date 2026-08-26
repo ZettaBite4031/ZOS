@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Kernel/Architecture/AMD64/Paging.hpp>
-#include <Kernel/Memory/VirtualMemory.hpp>
+#include <Kernel/Memory/VirtualAddressAllocator.hpp>
 
 namespace Zos::Kernel::Architecture::AMD64 {
     inline constexpr Memory::Uint16 KernelCodeSelector{ 0x08 };

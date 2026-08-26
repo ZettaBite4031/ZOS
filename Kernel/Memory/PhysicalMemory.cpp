@@ -2,8 +2,6 @@
 
 namespace Zos::Kernel::Memory {
     namespace {
-        constexpr Uint64 MaximumValue{ ~Uint64{ 0 } };
-
         [[nodiscard]] Uint64 Minimum(Uint64 left, Uint64 right) noexcept {
             return left < right ? left : right;
         }

@@ -10,10 +10,6 @@ extern "C" {
 }
 
 namespace Zos::Kernel::Memory {
-    namespace {
-        constexpr Uint64 MaximumValue{ ~Uint64{ 0 } };
-    }
-
     bool KernelHeap::IsPowerOfTwo(Uint64 value) noexcept {
         return value != 0 && (value & (value - 1)) == 0;
     }

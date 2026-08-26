@@ -8,6 +8,8 @@ namespace Zos::Kernel::Memory {
 
     inline constexpr Uint64 PageSize{ 4096 };
     inline constexpr Uint64 Dma32AddressLimit{ 0xFFFFFFFFULL };
+    
+    inline constexpr Uint64 MaximumValue{ ~Uint64{ 0 } };
 
     class PhysicalAddress final {
     public:

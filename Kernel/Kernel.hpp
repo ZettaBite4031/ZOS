@@ -1,8 +1,10 @@
 #pragma once
 
 #include <Kernel/Memory/PhysicalMemory.hpp>
-#include <Kernel/Memory/VirtualMemory.hpp>
+#include <Kernel/Memory/VirtualAddressAllocator.hpp>
+#include <Kernel/Memory/KernelAddressSpace.hpp>
 #include <Kernel/Memory/KernelHeap.hpp>
+#include <Kernel/Memory/KernelStack.hpp>
 
 #include <Kernel/Architecture/AMD64/Paging.hpp>
 #include <Kernel/Architecture/AMD64/Interrupts.hpp>
